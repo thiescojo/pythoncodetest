@@ -3,26 +3,21 @@ on: push
 env:
   FILE_NAME: hello-artifact
 jobs:
-  job1:
-    name: Test
+   Test:
+      runs-on: ubuntu-latest
+      steps: 
+       - uses: actions/checkout@v2
+       - run: python hello.py
+
+   build:
+    needs: Test
     runs-on: ubuntu-latest
-    steps: 
-      - name: checkout the repo
-        uses: actions/checkout@v2
-      - name: run python script 
-        run: python hello.py
-  job2:
-           name: build
-           needs: job1
-           runs-on: ubuntu-latest
-           steps:
-           - name: checkout the repo
-             uses: actions/checkout@v2
-           - name: upload the artifact
-             uses: actions/upload-artifact@v2
-             with:
-              name: ${{ env.FILE_NAME }}
-              path: ./
+    steps:
+     - uses: actions/checkout@v2
+     - uses: actions/upload-artifact@v2
+       with:
+        name: ${{ env.FILE_NAME }}
+        path: ./
         
         
         
