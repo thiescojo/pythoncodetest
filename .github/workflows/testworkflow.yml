@@ -9,20 +9,21 @@ jobs:
     steps: 
       - name: checkout the repo
         uses: actions/checkout@v2
+      - name: run python script 
         run: python hello.py
 
-    job2:
-      name: build
-      needs: job1
-      runs-on: ubuntu-latest
-      steps:
-       - name: checkout the repo
-         uses: actions/checkout@v2
-       - name: upload the artifact
-         uses: actions/upload-artifact@v2
-         with:
-          name: ${{ env.FILE_NAME }}
-          path: ./
+         job2:
+           name: build
+           needs: job1
+           runs-on: ubuntu-latest
+           steps:
+           - name: checkout the repo
+             uses: actions/checkout@v2
+           - name: upload the artifact
+             uses: actions/upload-artifact@v2
+             with:
+              name: ${{ env.FILE_NAME }}
+              path: ./
         
         
         
